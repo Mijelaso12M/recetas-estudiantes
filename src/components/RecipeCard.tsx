@@ -13,7 +13,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   const handleFavoritoClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (isFavorito(recipe.id)) {
       removeFromFavoritos(recipe.id);
     } else {

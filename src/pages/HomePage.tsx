@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecipes } from '../hooks/useRecipes';
 import RecipeCard from '../components/RecipeCard';
+import SearchBar from '../components/SearchBar'; // ✅ Importamos el nuevo componente
 
 const HomePage: React.FC = () => {
   const { recetas } = useRecipes();
 
-  // Obtener las recetas más valoradas (top 3)
-  const recetasDestacadas = recetas
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // 🔍 Filtrar recetas por nombre según búsqueda
+  const recetasFiltradas = recetas.filter(receta =>
+    receta.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // ⭐ Obtener las recetas más valoradas (top 3)
+  const recetasDestacadas = [...recetasFiltradas]
     .sort((a, b) => b.valoracion - a.valoracion)
     .slice(0, 3);
 
-  // Obtener recetas rápidas (menos de 20 minutos)
-  const recetasRapidas = recetas
+  // ⚡ Obtener recetas rápidas (menos de 20 minutos)
+  const recetasRapidas = recetasFiltradas
     .filter(receta => receta.tiempo <= 20)
     .slice(0, 3);
 
@@ -32,6 +40,13 @@ const HomePage: React.FC = () => {
               Crear Mi Receta
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* 🔍 Sección de búsqueda */}
+      <section className="search-section">
+        <div className="search-container" style={{ maxWidth: '600px', margin: '2rem auto' }}>
+          <SearchBar onSearch={setSearchQuery} />
         </div>
       </section>
 

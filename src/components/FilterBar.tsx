@@ -37,7 +37,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           onChange={(e) => onCategoryChange(e.target.value)}
           className="filter-select"
         >
-          <option value="">Todas las categorías</option>
+          <option value="" color='black'>Todas las categorías</option>
           {categories.map(category => (
             <option key={category} value={category}>
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -50,7 +50,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
           onChange={(e) => onDifficultyChange(e.target.value)}
           className="filter-select"
         >
-          <option value="">Todas las dificultades</option>
+          <option value="" color='black'>Todas las dificultades</option>
           <option value="fácil">🟢 Fácil</option>
           <option value="medio">🟡 Medio</option>
           <option value="difícil">🔴 Difícil</option>
